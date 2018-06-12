@@ -57,6 +57,7 @@ lv:
   assignments:
     assign_other: Piešķirt rakstu
     add_available: Pievienot pieejamu rakstu
+    add_available_submit: Pievienot rakstus
     assign_self: Piešķirt sev rakstu
     label: Piešķirt
     loading: Ielādē uzdevumus...
@@ -70,9 +71,14 @@ lv:
   campaign:
     active_campaigns: Aktīvās kampaņas
     add_organizer: Pievienot organizatoru
+    alert_article: Raksta nosaukums
+    alert_type: Veids
+    alert_user_id: Dalībnieks
     all_campaigns: Visas kampaņas
     campaign: Kampaņa
     campaigns: Kampaņas
+    created_at: Datums
+    course: Kurss
     create_campaign: Izveidot jaunu kampaņu
     create_my_campaign: Izveidot manu kampaņu!
     description: Apraksts
@@ -92,6 +98,7 @@ lv:
     label: Tērzētava
   courses:
     activity: Aktivitāte
+    alerts: Brīdinājumi
     all_courses: Visi kursi
     archived: Arhivētie kursi
     actions: Darbības
@@ -225,6 +232,7 @@ lv:
     activity: Nesenās darbības
     articles_created: Izveidotie raksti
     articles_edited: Labotie raksti
+    bytes_added: Pievienotie baiti
     char_added: Rakstzīmes pievienotas
     char: Rakstzīmes pievienotas
     date_time: Datums/laiks

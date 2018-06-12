@@ -10,6 +10,7 @@
 # Author: Liuxinyu970226
 # Author: Reke
 # Author: S8321414
+# Author: Sanmosa
 # Author: Shangkuanlc
 # Author: Wehwei
 # Author: Wwycheuk
@@ -40,6 +41,7 @@ zh-TW:
     recent_activity: 最近活動
     report_problem: 回報問題
     request_account: 申請帳號
+    request_account_create: 建立帳號
     search: 提出問題
     search_results: 結果：「%{search_terms}」
     sign_up_extended: 註冊維基百科
@@ -132,7 +134,9 @@ zh-TW:
     title_too_large: 標題不可超出 255 個字元
     assignees: 被分配者
     assign_other: 分配條目
-    add_available: 加入一篇可用的條目
+    add_available: 加入可用的條目
+    add_available_placeholder: 在每行添加一個條目標題或 URL
+    add_available_submit: 添加條目
     assign_self: 指定自己一個條目
     assign_tooltip: 一個是您計劃創建、或改善的已分配條目
     confirm_add_available: 確定要加入 %{title} 嗎？
@@ -155,6 +159,10 @@ zh-TW:
   campaign:
     active_campaigns: 活躍競賽
     add_organizer: 添加組織者
+    alert_article: 條目標題
+    alert_label: 競賽提醒
+    alert_type: 類型
+    alert_user_id: 用戶
     all_campaigns: 所有競賽
     already_exists: 此競賽已存在！請以不同標題或指向內容再重試看看。
     campaign: 競賽
@@ -162,10 +170,12 @@ zh-TW:
     campaign_deleted: 競賽「%{title}」已被刪除
     campaign_not_updated: 不能更新競賽
     campaign_updated: 競賽已更新
+    created_at: 日期
     confirm_campaign_deletion: 確定要刪除標題為「%{title}」的競賽嗎？如果是，請輸入該競賽的標題以進行處理。
     confirm_campaign_deletion_failed: 「%{title}」不是此競賽的標題。競賽未被刪除
     confirm_course_removal: 確定您要從競賽「%{campaign_title}」移除「%{title}」嗎？
     course_already_removed: '%{title}已從競賽「%{campaign_title}」移除'
+    course: 課程
     course_removed: '%{title}已從競賽「%{campaign_title}」移除'
     create_campaign: 創建新競賽
     create_my_campaign: 創建我的競賽！
@@ -177,6 +187,7 @@ zh-TW:
     delete_campaign: 刪除此競賽
     disable_account_requests: 停用帳號申請
     enable_account_requests: 啟用帳號申請
+    no_alerts: 此競賽沒有提醒
     no_passcode: 沒有選課代碼
     none: 無
     organizers: 組織者
@@ -211,6 +222,7 @@ zh-TW:
     accounts_generation_confirm_message: 您確定您要啟用帳號申請嗎？
     activity: 活躍度
     active_courses: 啟動%{course_type}
+    alerts: 提醒
     all_courses: 所有課程
     already_enrolled: 您已經成為「%{title}」課程的一份子！
     already_exists: 已存在於該課程中！
@@ -341,7 +353,7 @@ zh-TW:
     join: 加入
     join_course: 加入課程
     join_prompt: 加入'%{title}'嗎？
-    join_successful: 您已成功加入 %{title}。
+    join_successful: 您已成功加入 %{title}。控制面板將會週期更新來自動追蹤您的貢獻，可讓您日後查看您做出了哪些重要影響！
     join_failed: 登記失敗。
     join_failure_details:
       cannot_join_twice: 用戶不可加入同一課程兩次。
@@ -418,6 +430,7 @@ zh-TW:
     timeline: 分配作業細節
     timeline_enabled: 時間軸已啟用
     timeline_link: 時間軸
+    timeline_tooltip: 啟用時間軸能讓您指定各週活動以及分配培訓模組。這對於教育方案課程以及其它長時間、高度結構化方案很有用。
     time_zone_message: 開始及結束時間會以您的本地時區顯示。
     title: 標題
     training_due: 訓練模組 "%{title}" 已經發派到這個課程中，截止日期為 %{date}。
@@ -441,7 +454,7 @@ zh-TW:
       在呈交後，此課程會使用您的使用者名稱自動地發佈到維基百科。在發佈之後，在設定的時間軸上的所有新編輯將會複製一份到維基百科上。
       您確定想要執行嗎？
     wiki_staff: Wiki ED 工作人員
-    withdrawn: 撤回
+    withdrawn: 沒有做出分配
     word_count_doc: 在課程學期間由選課學生所添增到主命名空間條目的字元增加估計量
     yourcourses: 您的課程
     survey:
@@ -539,13 +552,14 @@ zh-TW:
     are_trained: 最近培訓
     articles_created: 已建立的條目
     articles_edited: 已編輯的條目
+    bytes_added: 已添加位元組
     characters: 字元
     char_added: 新增的字元
     char_changed: 變更的字元
     char: 新增的字元
     date_time: 日期/時間
     edit_count_description: 總編輯數
-    per_user: '%{number}/使用者'
+    per_user: '%{number}/用戶'
     revisions: 近期編輯
     tags: 標籤
     upload_count: 維基共享資源上傳
@@ -563,9 +577,9 @@ zh-TW:
   namespace:
     main: 主空間
     main_char_added: 主空間字元以加入
-    user: 使用者空間
+    user: 用戶名字空間
     user_char_added: 使用者空間字元以加入
-    user_ns: 使用者
+    user_ns: 用戶
   recent_activity:
     active_courses: 條目使用於
     article_title: 文章標題
@@ -707,6 +721,7 @@ zh-TW:
     loading: 上傳載入中⋯⋯
     none: 此班級未上傳任何圖片或媒體檔案至維基共享資源。
     time_doc: 每個上傳檔案的時間 (顯示為您使用的本地時間)
+    uploaded_at: 上傳於
     uploaded_by: 上傳者為
     usage_count: 使用量
     usages: 使用狀況
@@ -720,7 +735,7 @@ zh-TW:
     authorship_data_not_fetched: 無法索取作者資料
     character_doc: 加入此命名空間的內容加入總數。計算方式是把所有編輯的增加頁面文字量的編輯進行加總。這個數字並不完全代表使用者所增加的新內容，還原原本的內容也會被計算為加入總數之中。
     chars_added: 字數的增加<br> (條目|使用者|草稿)
-    contributions: 使用者貢獻
+    contributions: 用戶貢獻
     contributions_history_full: 在維基百科上檢視完整的貢獻歷史
     contributions_more: 檢視更多貢獻
     contribution_statistics: 貢獻統計
@@ -827,15 +842,12 @@ zh-TW:
     json_explanation: 看起來您似乎有退出。請重整、登入並再試一次。
   error_incorrect_passcode:
     header: 選課代碼錯誤。 :-(
-    explanation: |-
-      選課代碼錯誤，無法登記此課程。
-      請向導師索取正確選課代碼後再登記此課程。
+    explanation: 選課代碼錯誤，無法登記此課程。請向導師索取正確選課代碼後再登記此課程。您可以透過輸入以下正確代碼來重試。
+  error_no_course:
+    explanation: 沒有%{slug}這樣的課程存在。
   error_404:
     header: 查無頁面。:-(
-    explanation: |-
-      此頁面不存在。
-      若您正試圖進入資訊看板的某項課程，該課程可能尚未在此資訊看板註冊。
-      若該課程最近才註冊，可能需要一些時間讓系統新增此課程。
+    explanation: 此頁面不存在。若您正試圖進入資訊看板的某項課程，該課程可能尚未在此資訊看板註冊。
   error_422:
     header: 422 — 無法處理的實體項目。 :-(
     explanation: 發生錯誤。請聯絡此資訊看板的維護人員，讓他們知道這個問題。
@@ -867,5 +879,17 @@ zh-TW:
   onboarding:
     supplementary:
       header: 您是如何知道我們的？
-      question_text: 您是在哪裡、或是從誰，來第一次聽到維基教育？
+      where_did_you_hear: 您是在哪裡、或是從誰，來第一次聽到維基教育？
+      why_are_you_here: 您想要做什麼？
+  article_finder:
+    page_assessment_grade: 評估分級
+    completeness_estimate: 完整性分數
+    average_views: 每日平均檢視
+    add_available_article: 添加為可用條目
+    already_added: 已添加至可用條目裡
+    max_completeness_label: 最大完整性（0 至 100）
+    minimum_views_label: 最小檢視數
+    depth: 層度
+    category: 分類
+    no_article_found: 此分類裡沒有條目
 ...

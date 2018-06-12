@@ -25,7 +25,7 @@ class AssignmentsController < ApplicationController
     remove_assignment_template
     @assignment.destroy
     update_onwiki_course_and_assignments
-    render json: { article: @id }
+    render json: { assignmentId: @assignment.id }
   end
 
   def create
@@ -33,9 +33,9 @@ class AssignmentsController < ApplicationController
     set_wiki { return }
     set_new_assignment
     update_onwiki_course_and_assignments
-    render json: @assignment
+    render partial: 'assignment', locals: { assignment: @assignment, course: @assignment.course }
   rescue AssignmentManager::DuplicateAssignmentError => e
-    render json: { errors: e }, status: 500
+    render json: { errors: e }, status: :internal_server_error
   end
 
   def update
@@ -45,7 +45,7 @@ class AssignmentsController < ApplicationController
       render partial: 'updated_assignment', locals: { assignment: @assignment }
     else
       render json: { errors: @assignment.errors, message: 'unable to update assignment' },
-             status: 500
+             status: :internal_server_error
     end
   end
 
@@ -72,7 +72,7 @@ class AssignmentsController < ApplicationController
     set_wiki { yield }
     find_assignment_by_params
     return unless @assignment.nil?
-    render json: { message: t('error.invalid_assignment') }, status: 404
+    render json: { message: t('error.invalid_assignment') }, status: :not_found
     yield
   end
 
@@ -93,7 +93,7 @@ class AssignmentsController < ApplicationController
   def set_wiki
     find_or_create_wiki
   rescue Wiki::InvalidWikiError
-    render json: { message: t('error.invalid_assignment') }, status: 404
+    render json: { message: t('error.invalid_assignment') }, status: :not_found
     yield
   end
 

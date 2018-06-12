@@ -27,6 +27,7 @@ lb:
     recent_activity: Rezent Aktivitéit
     report_problem: E Problem mellen
     request_account: E Benotzerkont ufroen
+    request_account_create: E Benotzerkont opmaachen
     search: eng Fro stellen
     search_results: 'Resultater fir: %{search_terms}'
     sign_up_extended: Mat Wikipedia umellen
@@ -95,7 +96,8 @@ lb:
     wiki: Wiki
   assignments:
     title_too_large: Den Titel däerf net méi wéi 255 Zeechen hunn
-    add_available: En disponibelen Artikel derbäisetzen
+    add_available: Disponibel Artikelen derbäisetzen
+    add_available_submit: Artikelen derbäisetzen
     no_available: Dëse Cours huet keng disponibel Artikelen.
     remove: Ewechhuelen
     review_self: En Artikel nokucken
@@ -105,10 +107,15 @@ lb:
       title: Kilometersténg
   campaign:
     add_organizer: Organisateur derbäisetzen
+    alert_article: Titel vum Artikel
+    alert_type: Typ
+    alert_user_id: Benotzer
     campaign: Campagne
     campaigns: Campagnen
     campaign_not_updated: Campagne konnt net aktualiséiert ginn
     campaign_updated: Campagne aktualiséiert
+    created_at: Datum
+    course: Cours
     default_passcode: Standard-Passcode
     description: Beschreiwung
     delete_campaign: Dës Campagne läschen
@@ -121,7 +128,7 @@ lb:
   categories:
     add_category: Kategorie derbäisetzen
     add_template: Schabloun derbäisetzen
-    add_this_category: Dës Kategorie dobäisetzen
+    add_this_category: Dës Kategorie derbäisetzen
     add_this_template: Dës Schabloun derbäisetzen
     name: Numm
     category_name: Numm vun der Kategorie
@@ -134,6 +141,7 @@ lb:
       aktivéiere wëllt?
     activity: Aktivitéit
     active_courses: Aktiv %{course_type}
+    alerts: Meldungen
     all_courses: All Coursen
     archived: Archivéiert Coursen
     actions: Aktiounen
@@ -292,6 +300,8 @@ lb:
     request_accounts: Benotzerkonten ufroen
     school: Institutioun
     school_and_term: Institiutioun/Wéini
+    student_editors: Editeuren
+    students: Editeuren
     students_short: Auteuren
     students_count: Zuel vu Participanten
     term: Wéini
@@ -310,6 +320,7 @@ lb:
     next_update: Nächst erwaart Aktualiséierung
     activity: Rezent Aktivitéit
     articles_edited: Geännert Artikelen
+    bytes_added: Byten derbäigesat
     characters: Buschtawen
     char_changed: Geännert Buschtawen
     date_time: Datum/Zäit
@@ -451,7 +462,7 @@ lb:
     instructor_impact: Gesamtimpakt duerch %{username} als Instrukter
     instructors_student_impact: Gesamtimpakt duerch Studente vum %{username}
     disclaimer: D'Informatioun déi dir ugitt gëtt ëffentlech disponibel gemaach.
-    bio_placeholder: Är Biographie dobäisetzen (fakultativ)
+    bio_placeholder: Är Biographie derbäisetzen (fakultativ)
     location_placeholder: Setzt d'Plaz wou Dir sidd, derbäi (fakultativ)
     institution_placeholder: Numm vun der Institutioun (fakultativ)
   wizard:
@@ -474,6 +485,8 @@ lb:
     header: Net autoriséiert.>:-(
     json_explanation: Et gesäit esou aus wéi wann Dir ausgeloggt gouf. Aktualiséiert
       w.e.g., loggt Iech an a probéiert nach eng Kéier.
+  error_no_course:
+    explanation: Et gëtt kee Cours %{slug}.
   error_404:
     header: Säit net fonnt. :-(
   error_500:
@@ -489,5 +502,14 @@ lb:
   onboarding:
     supplementary:
       header: Wéi hutt Dir vun eis héieren?
-      question_text: Wou oder vu wiem hutt Dir fir d'éischt vu WikiEducation héieren?
+      where_did_you_hear: Wou oder vu wiem hutt Dir fir d'éischt vu WikiEducation
+        héieren?
+      why_are_you_here: Wat wëllt Dir maachen?
+  article_finder:
+    average_views: Duerchschnëttlech gekuckt pro Dag
+    add_available_article: Als disponibelen Artikel derbäisetzen
+    already_added: Scho bei déi disponibel Artikelen derbäigesat
+    depth: Déift
+    category: Kategorie
+    no_article_found: Keng Artikelen an dëser Kategorie fonnt
 ...

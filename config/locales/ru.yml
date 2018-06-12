@@ -7,6 +7,7 @@
 # Author: Edible Melon
 # Author: Facenapalm
 # Author: Gehhrr
+# Author: Happy13241
 # Author: INS Pirat
 # Author: Iniquity
 # Author: Irus
@@ -32,6 +33,7 @@ ru:
       можно увеличивать и уменьшать значение.
   application:
     cancel: Отмена
+    create_accounts: Создайте учётную запись в Википедии
     dashboard: Панель Wiki Ed
     documentation: Документация
     error: 'Произошла ошибка:'
@@ -51,9 +53,12 @@ ru:
     my_dashboard: Моя панель
     recent_activity: Недавние действия
     report_problem: Сообщить о проблеме
+    request_account: Запросить учётную запись
+    request_account_create: Создать учётную запись
     search: задать вопрос
     search_results: 'Результаты для: "%{search_terms}"'
     sign_up_extended: Зарегистрируйтесь в Википедии
+    sign_up_wikipedia: Или войдите в Википедию
     sign_up_log_in_extended: через Википедию
     sign_up: Зарегистрироваться
     submit: Отправить
@@ -76,9 +81,11 @@ ru:
       курс», чтобы найти и присоединиться к нему.
     no_courses_instructor: Похоже, у вас нет никаких курсов.
     no_courses_student: Похоже, вы ещё не присоединились к курсу.
-    opt_out: Просьба отказаться от ориентации
-    orientation_notice: Прежде чем создать курс, давайте пройдемся по ориентации,
-      чтобы помочь вам начать работу. (Она занимает около 30 минут.)
+    opt_out: Пропустить курс ознакомления
+    orientation_notice: Прежде чем создать курс, мы предлагаем вам пройти курс ознакомления,
+      чтобы помочь вам начать работу. Он занимает около 30 минут.
+    review_orientation: Пересмотреть курс ознакомления
+    start_orientation: Начать курс ознакомления
     blog_headline: Последние новости Wiki Education
     about_programs: Этот сайт отслеживает вики-активность через т.н. «программы» —
       отдельные мероприятия, такие как семинары по совместному редактированию (edit-a-thon)
@@ -147,10 +154,12 @@ ru:
     article: Вам назначена статья %{title}.
     title_too_large: Название не должно превышать 255 символов
     assignees: Назначенный(е)
+    add_available: Добавить доступные статьи
+    add_available_submit: Добавить статьи
     confirm_add_available: Вы уверены, что хотите добавить %{title}?
     confirm_addition: Вы уверены, что хотите назначить %{username} для работы с %{title}?
-    confirm_deletion: Вы уверены, что хотите удалить это назначение?
-    loading: Загрузка назначений...
+    confirm_deletion: Вы уверены, что хотите удалить это задание?
+    loading: Загрузка заданий...
     none: Этот курс не имеет назначенных статей.
     remove: Удалить
     reviewers: Проверяющий(е)
@@ -161,16 +170,21 @@ ru:
   campaign:
     active_campaigns: Активные кампании
     add_organizer: Добавить организатора
+    alert_article: Название статьи
+    alert_type: Тип
+    alert_user_id: Участник
     all_campaigns: Все кампании
     campaign: Кампания
     campaigns: Кампании
     campaign_deleted: Кампания "%{title}" была удалена
     campaign_updated: Кампании обновлены
+    created_at: Дата
     confirm_campaign_deletion_failed: '"%{title}" - это не название этой кампании.
       Кампания не была удалена.'
     confirm_course_removal: Вы уверены, что хотите удалить "%{title}" из кампании
       "%{campaign_title}"?
     course_already_removed: '"%{title}" уже удалена из кампании "%{campaign_title}"'
+    course: Курс
     course_removed: '"%{title}" был удален из кампании "%{campaign_title}"'
     create_campaign: Создать новую кампанию
     description: Описание
@@ -187,6 +201,7 @@ ru:
   categories:
     add_category: Добавить категорию
     add_template: Добавить шаблон
+    add_this_category: Добавить эту категорию
     add_this_template: Добавить данный шаблон
     depth: Глубина подкатегорий
     name: Имя
@@ -197,9 +212,12 @@ ru:
     label: Чат
   courses:
     activity: Деятельность
+    alerts: Оповещения
     all_courses: Все курсы
     actions: Действия
     articles: Статьи
+    assignment_end: Конец задания
+    assignment_start: Начало задания
     calendar:
       legend: Легенда
     cancel: Отмена
@@ -213,6 +231,10 @@ ru:
     courses: Курсы
     creation_date: Дата создания
     creator:
+      assignment_end: Конец задания
+      assignment_end_placeholder: Конец задания (ГГГГ-ММ-ДД)
+      assignment_start: Начало задания
+      assignment_start_placeholder: Начало задания (ГГГГ-ММ-ДД)
       checking_for_uniqueness: Этот курс проверяется на уникальность.
       choose_clone: Выберите курс для клонирования.
       clone_previous: Клонировать предыдущий курс
@@ -226,6 +248,7 @@ ru:
       course_project: Домашний проект
       course_school: Школьный курс
       course_subject: Предмет курса
+      course_term_placeholder: Срок
       course_title: Название курса
       create_button: Создать свой курс!
       create_label: Создать новый курс!
@@ -240,20 +263,24 @@ ru:
     current: Текущие курсы
     data_uploads: Данные загрузок на Викисклад
     delete_course: Удалить курс
+    delete_suggestion: Удалить
     delete_course_instructions: Эту страницу можно удалить, если будут предварительно
       удалены все кампании.
+    dismiss_survey: Закрыть
     download_stats_data: Скачать статистику
     duration: Продолжительность курса
     edit_count: Число правок
     enable_chat: Включить чат
+    end: Завершение
     ended: Курс завершен.
+    enroll: Записаться
     error:
       exists: Такой курс уже существует! Пожалуйста, попробуйте ещё раз с другим заголовком,
         школой или семестром.
       user_exists: К сожалению, участника %{username} не существует.
       duplicate_slug: Другая программа под названием %{slug} уже существует.
     feedback: Обратная связь
-    gradeables_none: У этого курса нет оцениваемых назначений.
+    gradeables_none: У этого курса нет оцениваемых заданий.
     instructor:
       one: Инструктор
       other: Инструкторы
@@ -261,7 +288,9 @@ ru:
     join: Присоединиться
     join_course: Присоединиться к курсу
     join_prompt: Присоединиться к '%{title}'?
-    join_successful: Вы были успешно присоединены к %{title}.
+    join_successful: Вы были успешно присоединились к «%{title}». Ваш вклад будет
+      автоматически обновляться на панели. Чтобы его просмотреть, проверьте панель
+      чуть позже.
     join_failure_details:
       not_yet_approved: Этот курс еще не был одобрен для регистрации.
     loading: Загрузка…
@@ -269,14 +298,19 @@ ru:
     new_week: Добавить новую неделю
     new_account_check_username: Проверить доступность имени пользователя
     new_account_email: Адрес электронной почты
+    new_account_email_placeholder: name@example.org
     new_account_username_invalid: Введено недействительное имя пользователя.
     nocourses: Вы не участвуете ни в одном курсе.
     nocourse: не участвовал в каких-либо курсах.
-    overview: Обзор
+    ores_plot: ORES
+    overview: В начало
+    passcode: Код доступа
+    passcode_none: Нет кода доступа
     passcode_prompt: 'Введите пароль, чтобы присоединиться:'
     private: Скрытый
     revisions_doc: Число правок за последние %{timeframe} дней
     school: Школа
+    start: Начать
     students: Студенты
     students_count: '# Студенты'
     students_none: У этого курса пока нет студентов.
@@ -299,12 +333,14 @@ ru:
       other: Добровольцы
     weeks_none: У этого курса ещё нет расписания.
     wiki_staff: Сотрудники Wiki Ed
+    withdrawn: Задание не сделано
     yourcourses: Ваши курсы
   courses_generic:
     all_courses: Все программы
     assignment_end: Конец события
     assignment_start: Начало события
     cancel: Отмена
+    course: Программа
     courses: Программы
     campaigns: 'Кампании:'
     campaign_courses: Программы %{title}
@@ -330,6 +366,7 @@ ru:
     join_details: Чтобы присоединиться к этой программе, вам нужно получить от посредника
       код доступа или ссылку, которая включает пароль.
     leave_course: Покинуть программу
+    request_accounts: Запрос учётных записей
     school: Учреждение
     student_editors: Редакторы
     students: Редакторы
@@ -343,8 +380,9 @@ ru:
     save: Сохранить
     edit_description: Редактирование описание
     edit_details: Редактировать подробности
+    edit_template: Редактировать шаблон
   metrics:
-    last_update: Последнее обновление
+    last_update: Последнее обновление статистики
     activity: Недавние действия
     articles_created: Статей создано
     articles_edited: Статей отредактировано
@@ -460,13 +498,13 @@ ru:
     bio_placeholder: Добавьте свою биографию (необязательно)
     location_placeholder: Добавить свое местоположение (необязательно)
   wizard:
-    assignment_dates: Даты Назначений
-    assignment_description: Выбрать начальную и конечную даты для любого назначения.
+    assignment_dates: Даты заданий
+    assignment_description: Выбрать начальную и конечную даты для любого задания.
       Например, если вы хотите начать свой проект Википедия второй недели занятий,
       задать дату начала задания до одной недели после даты начала курса. Этот инструмент
-      задание на проектирование позволит создать проект график, который вписывается
-      в график времени, который Вы выберете.
-    assignment_type: Тип назначения
+      проектирования заданий позволит создать график проекта, который вписывается
+      в график времени, который вы выберете.
+    assignment_type: Что студенты сделают в рамках своего задания в Википедии?
     confirm_dates: Выберите даты проведения, еженедельных обсуждений и каникул для
       вашего курса.
     course_dates: Даты проведения курса
@@ -478,7 +516,7 @@ ru:
     review_selections: Пожалуйста, просмотрите выбранные вами опции ниже. Нажмите
       на опцию, чтобы изменить. После завершения нажмите 'Submit', чтобы завершить
       выбор и построить ваш список назначений.
-    select_assignment: Выберите вид назначения, которое вы хотите добавить в список.
+    select_assignment: Выберите вид задания, которое вы хотите добавить в список.
     summary: Итог
   error:
     oauth_invalid: Ваша авторизация в Википедии истекла. Пожалуйста, войдите ещё раз.

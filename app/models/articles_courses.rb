@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: articles_courses
@@ -9,12 +8,10 @@
 #  updated_at    :datetime
 #  article_id    :integer
 #  course_id     :integer
-#  view_count    :integer          default(0)
+#  view_count    :bigint(8)        default(0)
 #  character_sum :integer          default(0)
 #  new_article   :boolean          default(FALSE)
 #
-
-require_dependency "#{Rails.root}/lib/utils"
 
 #= ArticlesCourses is a join model between Article and Course.
 #= It represents a mainspace Wikipedia article that has been worked on by a
@@ -70,8 +67,8 @@ class ArticlesCourses < ApplicationRecord
   #################
   # Class methods #
   #################
-  def self.update_all_caches(articles_courses=nil)
-    Utils.run_on_all(ArticlesCourses, :update_cache, articles_courses)
+  def self.update_all_caches(articles_courses)
+    articles_courses.find_each(&:update_cache)
   end
 
   def self.update_from_course(course)

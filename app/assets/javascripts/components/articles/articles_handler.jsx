@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 
 import ArticleList from './article_list.jsx';
 import AssignmentList from '../assignments/assignment_list.jsx';
-import ServerActions from '../../actions/server_actions.js';
 import AvailableArticles from '../articles/available_articles.jsx';
 import CourseOresPlot from './course_ores_plot.jsx';
 import CategoryHandler from '../categories/category_handler.jsx';
 import { fetchArticles, sortArticles, filterArticles } from "../../actions/articles_actions.js";
+import { fetchAssignments } from '../../actions/assignment_actions';
 import { getWikiArticles } from '../../selectors';
 
 const ArticlesHandler = createReactClass({
@@ -22,12 +22,19 @@ const ArticlesHandler = createReactClass({
     fetchArticles: PropTypes.func,
     limitReached: PropTypes.bool,
     limit: PropTypes.number,
-    articles: PropTypes.array
+    articles: PropTypes.array,
+    loadingArticles: PropTypes.bool,
+    assignments: PropTypes.array,
+    loadingAssignments: PropTypes.bool
   },
 
   componentWillMount() {
-    ServerActions.fetch('assignments', this.props.course_id);
-    return this.props.fetchArticles(this.props.course_id, this.props.limit);
+    if (this.props.loadingAssignments) {
+      this.props.fetchAssignments(this.props.course_id);
+    }
+    if (this.props.loadingArticles) {
+      this.props.fetchArticles(this.props.course_id, this.props.limit);
+    }
   },
 
   onChangeFilter(e) {
@@ -129,12 +136,17 @@ const mapStateToProps = state => ({
   articles: getWikiArticles(state),
   limitReached: state.articles.limitReached,
   wikis: state.articles.wikis,
+  wikidataLabels: state.wikidataLabels.labels,
+  loadingArticles: state.articles.loading,
+  assignments: state.assignments.assignments,
+  loadingAssignments: state.assignments.loading
 });
 
 const mapDispatchToProps = {
   fetchArticles,
   sortArticles,
-  filterArticles
+  filterArticles,
+  fetchAssignments
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticlesHandler);

@@ -12,6 +12,7 @@
 # Author: Nemo bis
 # Author: NumaPompilius3
 # Author: S4b1nuz E.656
+# Author: Sarah Bernabei
 # Author: Statix64
 # Author: Wikitoni
 ---
@@ -130,7 +131,9 @@ it:
     title_too_large: Il titolo non deve superare i 255 caratteri
     assignees: Assegnatario/i
     assign_other: Assegna una voce
-    add_available: Aggiungi una voce disponibile
+    add_available: Aggiungi voci disponibili
+    add_available_placeholder: Aggiungi il titolo di una voce o un URL per riga
+    add_available_submit: Aggiungi voci
     assign_self: Assegnami una voce
     confirm_add_available: Sei sicuro di voler aggiungere %{title}?
     confirm_addition: Sei sicuro di voler assegnare %{title} a %{username}?
@@ -146,10 +149,14 @@ it:
   campaign:
     active_campaigns: Campagne attive
     add_organizer: Aggiungi organizzatore
+    alert_type: Tipo
+    alert_user_id: Utente
     all_campaigns: Tutte le campagne
     campaign: Campagna
     campaigns: Campagne
     campaign_updated: Campagna aggiornata
+    created_at: Data
+    course: Corso
     create_campaign: Crea una nuova campagna
     create_my_campaign: Crea la mia campagna!
     description: Descrizione
@@ -167,6 +174,7 @@ it:
   courses:
     activity: Attività
     active_courses: '%{course_type} attivo/a'
+    alerts: Avvisi
     all_courses: Tutti i corsi
     already_enrolled: Fai già parte di '%{title}'!
     already_exists: Quello che hai aggiunto esiste già per questo corso!
@@ -270,7 +278,9 @@ it:
     instructors: Insegnanti
     join: Unisciti
     join_prompt: Unirsi a '%{title}'?
-    join_successful: Hai aderito con successo a %{title}.
+    join_successful: Hai aderito con successo a %{title}. Il cruscotto terrà automaticamente
+      traccia dei tuoi contributi con aggiornamenti periodici. Torna più tardi per
+      vedere quale impatto hai fatto!
     join_no_passcode: Sei sicuro di voler entrare in questo corso?
     leave_confirmation: Sei sicuro di voler lasciare questo corso?
     loading: Caricamento…
@@ -340,7 +350,7 @@ it:
       other: Volontari
     weeks_none: Questo corso non ha ancora una linea temporale.
     wiki_staff: Staff Wiki Ed
-    withdrawn: Ritirato
+    withdrawn: Non assegnato
     word_count_doc: Una stima del numero di parole aggiunte alle voci nel namespace
       principale dagli studenti del corso durante il periodo del corso
     yourcourses: Tuoi corsi
@@ -427,6 +437,7 @@ it:
     activity: Attività recente
     articles_created: Voci create
     articles_edited: Voci modificate
+    bytes_added: Bytes aggiunti
     characters: Caratteri
     char_added: Caratteri aggiunti
     char_changed: Caratteri Modificati
@@ -539,6 +550,7 @@ it:
     loading: Caricando gli upload...
     none: Questa classe non ha contribuito con alcuna immagine o altri file multimediali
       su Wikimedia Commons.
+    uploaded_at: Caricato il
     uploaded_by: Caricato da
     usage_count: Numero di utilizzi
     usages: Usi
@@ -632,7 +644,8 @@ it:
   error_incorrect_passcode:
     header: Codice di accesso non corretto. :-(
     explanation: Il codice per iscriversi a questo corso non è corretto. Chiedi all'insegnate
-      il codice attuale per iscriversi a questo corso.
+      il codice attuale per iscriversi a questo corso. Puoi riprovare inserendo il
+      codice corretto sotto.
   error_404:
     header: Pagina non trovata. :-(
   error_422:
@@ -665,4 +678,7 @@ it:
       link: Rispondi sondaggio
   wiki_api:
     create_account_reason: Questo utente sta partecipando a %{event}.
+  onboarding:
+    supplementary:
+      why_are_you_here: Cosa ti piacerebbe fare?
 ...

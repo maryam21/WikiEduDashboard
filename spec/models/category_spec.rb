@@ -3,7 +3,7 @@
 #
 # Table name: categories
 #
-#  id             :integer          not null, primary key
+#  id             :bigint(8)        not null, primary key
 #  wiki_id        :integer
 #  article_titles :text(16777215)
 #  name           :string(255)
@@ -40,7 +40,7 @@ RSpec.describe Category, type: :model do
     context 'for template-source Category' do
       let(:category) { create(:category, name: '2016-Olympic-stub', source: 'template') }
       let(:course) { create(:course) }
-      let!(:article) { create(:article, title: 'Nur_Shazrin_Mohamad_Latif') }
+      let!(:article) { create(:article, title: 'Nur_Shazrin_Mohd_Latif') }
 
       it 'updates article titles for categories associated with courses' do
         expect(Category.last.article_titles).to be_empty

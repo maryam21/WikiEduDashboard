@@ -8,6 +8,7 @@ require_dependency "#{Rails.root}/lib/importers/rating_importer"
 require_dependency "#{Rails.root}/lib/article_status_manager"
 require_dependency "#{Rails.root}/lib/importers/upload_importer"
 require_dependency "#{Rails.root}/lib/importers/ores_scores_before_and_after_importer"
+require_dependency "#{Rails.root}/lib/alerts/overdue_training_alert_manager"
 
 # Executes all the steps of 'update_constantly' data import task
 class DailyUpdate
@@ -17,7 +18,6 @@ class DailyUpdate
     setup_logger
     return if updates_paused?
     return if update_running?(:daily)
-    wait_until_constant_update_finishes if update_running?(:constant)
 
     run_update_with_pid_files(:daily)
   end
@@ -30,6 +30,7 @@ class DailyUpdate
     update_commons_uploads
     update_article_data
     update_category_data
+    generate_overdue_training_alerts if Features.wiki_ed?
     push_course_data_to_salesforce if Features.wiki_ed?
     log_end_of_update 'Daily update finished.'
   # rubocop:disable Lint/RescueException
@@ -51,15 +52,6 @@ class DailyUpdate
   def update_commons_uploads
     log_message 'Identifying deleted Commons uploads'
     UploadImporter.find_deleted_files
-
-    log_message 'Updating Commons uploads for current students'
-    UploadImporter.import_uploads_for_current_users
-
-    log_message 'Updating Commons uploads usage counts'
-    UploadImporter.update_usage_count_by_course(Course.current)
-
-    log_message 'Getting thumbnail urls for Commons uploads'
-    UploadImporter.import_all_missing_urls
   end
 
   def update_article_data
@@ -84,6 +76,14 @@ class DailyUpdate
     Category.refresh_categories_for(Course.current)
   end
 
+  ##########
+  # Alerts #
+  ##########
+  def generate_overdue_training_alerts
+    log_message 'Generating alerts for overdue trainings'
+    OverdueTrainingAlertManager.new(Course.strictly_current).create_alerts
+  end
+
   ###############
   # Data export #
   ###############
@@ -91,25 +91,6 @@ class DailyUpdate
     log_message 'Pushing course data to Salesforce'
     Course.current.each do |course|
       PushCourseToSalesforce.new(course) if course.flags[:salesforce_id]
-    end
-  end
-
-  #################################
-  # Logging and process managment #
-  #################################
-
-  def wait_until_constant_update_finishes
-    sleep_time = 0
-    log_message 'Delaying daily until current update finishes...'
-    begin
-      create_pid_file(:sleep)
-      while update_running?(:constant)
-        sleep_time += 5
-        sleep(5.minutes)
-      end
-      log_message "Starting daily update after waiting #{sleep_time} minutes"
-    ensure
-      delete_pid_file(:sleep)
     end
   end
 end

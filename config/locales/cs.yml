@@ -46,6 +46,7 @@ cs:
     recent_activity: Nedávná aktivita
     report_problem: Nahlásit problém
     request_account: Požádat o účet
+    request_account_create: Vytvořit účet
     search: Zeptat se
     search_results: 'Výsledky pro: „%{search_terms}“'
     sign_up_extended: Zaregistrovat se skrze Wikipedii
@@ -136,6 +137,7 @@ cs:
       list: Článek seznamového typu
       '?': Neohodnocený článek — článek, jehož kvalita ještě nebyla ohodnocena
       does_not_exist: Tento článek na Wikipedii ještě není
+    see_more: Zobrazit více
     show_cumulative_changes: Zobrazit kumulované změny
     show_current_version: Zobrazit aktuální verzi
     show_current_version_with_authorship_highlighting: Aktuální verze se zvýrazněním
@@ -165,6 +167,9 @@ cs:
     assignees: Přiřazení
     assign_other: Přiřadit článek
     add_available: Přidat dostupný článek
+    add_available_placeholder: Přidejte na každý řádek jeden název článku nebo jednu
+      URL
+    add_available_submit: Přidejte články
     assign_self: Přiřadit článek sobě
     assign_tooltip: Přiřazený článek je ten, který plánujete vytvořit nebo vylepšit.
     confirm_add_available: Jste si jistý, že chcete přidat %{title}?
@@ -188,6 +193,10 @@ cs:
   campaign:
     active_campaigns: Aktivní programy
     add_organizer: Přidat organizátora
+    alert_article: Název článku
+    alert_label: Hlášení kampaně
+    alert_type: Typ
+    alert_user_id: Uživatel
     all_campaigns: Všechny programy
     already_exists: Tato kampaň již existuje! Prosím zkuste to znovu pod jiným názvem
       nebo s drobnou změnou
@@ -196,6 +205,7 @@ cs:
     campaign_deleted: Program „%{title}“ byl smazán
     campaign_not_updated: Kampaň nemůže být aktualizována
     campaign_updated: Program byl aktualizován
+    created_at: Datum
     confirm_campaign_deletion: Jste si jistý/á, že chcete smazat program s názevem
       „%{title}“? Pokud opravdu chcete pokračovat, vyplňte sem znovu název programu.
     confirm_campaign_deletion_failed: „%{title}“ není název tohoto programu. Program
@@ -203,6 +213,7 @@ cs:
     confirm_course_removal: Jste si jistý/á, že chcete smazat „%{title}“ z programu
       „%{campaign_title}“?
     course_already_removed: „%{title}“ byl úspěšně odebrán z programu „%{campaign_title}“
+    course: Kurz
     course_removed: „%{title}“ byl z programu „%{campaign_title}“ úspěšně smazán
     create_campaign: Vytvořit nový program
     create_my_campaign: Vytvořit můj program!
@@ -215,6 +226,7 @@ cs:
     delete_campaign: Odstranit tento program
     disable_account_requests: Zakázat žádosti o účet
     enable_account_requests: Povolit žádosti o účet
+    no_alerts: Tato kampaň nemá žádná hlášení
     no_passcode: bez vstupního kódu
     none: Žádné
     organizers: Organizátoři
@@ -253,6 +265,7 @@ cs:
     accounts_generation_confirm_message: Opravdu chcete povolit žádosti o účty?
     activity: Aktivita
     active_courses: Aktivní %{course_type}
+    alerts: Upozornění
     all_courses: Všechny kurzy
     already_enrolled: Již jste součástí kurzu '%{title}'!
     already_exists: To už pro tento kurz existuje!
@@ -421,7 +434,9 @@ cs:
     join: Zapsat se
     join_course: Připojit se ke kurzu
     join_prompt: Zapsat se do '%{title}'?
-    join_successful: Úspěšně jste se zapsali do %{title}
+    join_successful: Úspěšně jste se zapsali do %{title}. Nástěnka bude automaticky
+      sledovat vaše příspěvky a periodicky bude aktualizovat informace. Můžete pravidelně
+      kontrolovat dopad vašich příspěvků!
     join_failed: Nešlo se zapsat.
     join_failure_details:
       cannot_join_twice: Uživatelé se nemohou do stejného kurzu zapsat dvakrát.
@@ -509,6 +524,9 @@ cs:
     timeline: Detaily zadání
     timeline_enabled: Rozvrh je aktivován
     timeline_link: Časová osa
+    timeline_tooltip: Povolování časové osy vás nechá specifikovat týdenní aktivity
+      a přiřazuje trénovací moduly. Je to užitečné pro kurzy edukace a jiné dlouhé,
+      vysoce strukturované programy.
     time_zone_message: Časy začátku a konce jsou zobrazeny podle vašeho časového pásma.
     title: Název
     training_due: Výukový modul "%{title}" je přiřazen k tomuto kurzu; termín splnění
@@ -537,7 +555,7 @@ cs:
       vaším uživatelským účtem. Poté budou všechny editace tohoto kurzu změněny i
       na Wikipedii. \nJste si jist, že toto chcete udělat?"
     wiki_staff: Wiki Ed personál
-    withdrawn: Stáhnuté
+    withdrawn: Nerealizované zadání
     word_count_doc: Odhadovaný počet slov, které byly přidány do hlavního jmenného
       prostoru studenty kurzu během jeho průběhu
     yourcourses: Vaše kurzy
@@ -650,6 +668,7 @@ cs:
     are_trained: účastníků projektu
     articles_created: Vytvořené stránky
     articles_edited: Editované stránky
+    bytes_added: Přidáno bajtů
     characters: Znaky
     char_added: Přidáno znaků
     char_changed: Změněno znaků
@@ -823,6 +842,7 @@ cs:
     loading: Načítání nahrávek...
     none: Účastníci nepřispěli žádnými obrázky či jinými médii na Wikimedia Commons.
     time_doc: Čas každého nahraného souboru v místním čase
+    uploaded_at: Nahráno
     uploaded_by: Načteno uživatelem
     usage_count: Počet užití
     usages: Použití
@@ -879,7 +899,12 @@ cs:
     training_complete_count:
       one: '%{count} školení je aktuální'
       other: '%{count} školení jsou aktuální'
+    training_doc: Editoři, kteří ukončili všechny přiřazené tréninkové moduly, jsou
+      považováni za editory s aktuálním vzděláním.
     training_incomplete: Školení neukončeno
+    training_modules_completed:
+      one: '%{completed_count}/%{count} tréninkový modul dokončen'
+      other: '%{completed_count}/%{count} tréninkových modulů dokončeny'
     training_module_name: Tréninkový modul
     training_module_status: Stav
     username: Uživatelské jméno
@@ -906,10 +931,25 @@ cs:
     notify_overdue:
       message: Dokončete prosím přiřazené [%{link} školící moduly].
   wizard:
+    calendar_instructions: Vyberte data pro vložení nebo vyjmutí z rozvrhu (např.
+      prázdniny, volné dny). To pomůže nástroji pro tvorbu kurzů ve správném rozvržení
+      vašeho kurzu. Kliknutím měníte stav data (nevybráno, vybráno a prázdniny). Pokud
+      nemáte žádné prázdniny, zatrhněte dole "Nemám žádné prázdniny".
+    confirm_dates: Zvolte data začátku a konce kurzu, týdenních setkáni a prázdnin
+      pro váš kurz.
     course_dates: Termíny kurzů
+    min_weeks: Toto zadání vyžaduje alespoň %{min_weeks} dostupných týdnů. Upravte,
+      prosím, datum začátku a konce úlohy, pokud chcete použít tento typ zadání.
     select_one_option: Prosím vyberte 1 možnost.
+    minimum_options:
+      one: Prosím zvolte %{count} nebo více možností.
+      other: Prosím zvolte %{count} nebo více možností.
     read_less: Zobrazit méně
     read_more: Číst dál
+    review_selections: Zkontrolujte prosím váš výběr dole. Kliknutím můžete editovat
+      vybranou položku. Když skončíte, klikněte na 'Odeslat' k ukončení průvodce a
+      vytvoření vašeho rozvrhu.
+    select_assignment: Zvolte druh úlohy, kterou chcete vložit do vašeho rozvrhu.
     summary: Shrnutí
   error:
     form_errors: Prosím, zkontrolujte chybné položky ve formuláři.
@@ -935,9 +975,13 @@ cs:
     header: Nesprávné heslo. :-(
     explanation: Váš kód pro přihlášení se do tohoto kurzu je neplatný. Kontaktujte
       svého instruktora, který by vám měl poskytnout platný kód pro zapsání se do
-      tohoto kurzu.
+      tohoto kurzu. Můžete zkusit znovu zadat platný kód.
+  error_no_course:
+    explanation: Žádný kurz %{slug} neexistuje.
   error_404:
     header: Stránka nebyla nalezena. :-(
+    explanation: Tato stránka neexistuje. Pokud se pokoušíte získat přístrojovou desku
+      pro kurz, kurz nemusí být na této desce zaregistrován.
   error_422:
     header: 422 — entita nelze zpracovat.  :-(
     explanation: Došlo k chybě. Prosím kontaktujte správce této nástěnky a sdělte
@@ -948,9 +992,14 @@ cs:
       jim, k čemu konkrétně došlo.
   login_error:
     header: Chyba při přihlašování
+    explanation: Zdá se, že se vyskytl problém s přihlášením. (Omlouváme se, občas
+      se to stane.) Zkuste to prosím znovu.
   survey:
     login_message: Děkujeme za váš čas. Přihlaste se prosím do vaší Wiki Ed nástěnky,
       abyste se dostali k průzkumu.
+    notification_explanation: Pokud je pole dole zaškrtnuto, uživatel bude, mimo upozornění
+      v prohlížeči, dostávat i emaily, v závislosti na nastavení upozornění. Pokud
+      ne, budou se zobrazovat pouze upozornění v prohlížeči.
     notification_schedule_explanation: Oznámení zahrnují oznámení v prohlížeči a emaily,
       pokud je to povoleno výše.
     follow_up_explanation: Nechte prázdné, pokud si nepřejete dostávat emaily s upozorněním.
@@ -972,4 +1021,9 @@ cs:
     no_responses: Zatím zde není žádná zpětná vazba.
   wiki_api:
     create_account_reason: Tento uživatel se účastní %{event}.
+  onboarding:
+    supplementary:
+      header: Jak jste se o nás dozvěděl(a)?
+      where_did_you_hear: Kde nebo od koho jste poprvé slyšel(a) o Wiki Education?
+      why_are_you_here: Co byste chtěli dělat?
 ...

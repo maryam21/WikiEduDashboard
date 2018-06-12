@@ -31,7 +31,7 @@ class CoursesController < ApplicationController
 
     unless course_creation_manager.valid?
       render json: { message: course_creation_manager.invalid_reason },
-             status: 404
+             status: :not_found
       return
     end
     @course = course_creation_manager.create
@@ -98,7 +98,7 @@ class CoursesController < ApplicationController
     unless campaign
       render json: {
         message: "Sorry, #{campaign_params[:title]} is not a valid campaign."
-      }, status: 404
+      }, status: :not_found
       return
     end
     ListCourseManager.new(@course, campaign, request).manage
@@ -111,7 +111,7 @@ class CoursesController < ApplicationController
 
   def manual_update
     @course = find_course_by_slug(params[:id])
-    UpdateCourseRevisions.new(@course) if user_signed_in?
+    UpdateCourseStats.new(@course) if user_signed_in?
     redirect_to "/courses/#{@course.slug}"
   end
 

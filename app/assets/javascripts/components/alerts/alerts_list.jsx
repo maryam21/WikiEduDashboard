@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import List from '../common/list.jsx';
 import Alert from './alert.jsx';
 
-const AlertsList = ({ alerts }) => {
+const AlertsList = ({ alerts, sortBy }) => {
   const elements = alerts.map(alert => {
     return <Alert alert={alert} key={alert.id} />;
   });
@@ -15,13 +15,12 @@ const AlertsList = ({ alerts }) => {
     },
     type: {
       label: I18n.t('campaign.alert_type'),
-      desktop_only: true
     },
     course: {
       label: I18n.t('campaign.course'),
       desktop_only: true
     },
-    user_id: {
+    user: {
       label: I18n.t('campaign.alert_user_id'),
       desktop_only: true
     },
@@ -37,6 +36,7 @@ const AlertsList = ({ alerts }) => {
       keys={keys}
       table_key="alerts"
       none_message={I18n.t('campaign.no_alerts')}
+      sortBy={sortBy}
     />
   );
 };

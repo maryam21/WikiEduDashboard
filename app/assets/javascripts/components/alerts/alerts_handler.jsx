@@ -4,15 +4,31 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AlertsList from './alerts_list.jsx';
-import { fetchAlerts, sortAlerts } from '../../actions/alert_actions';
+import { fetchAlerts, sortAlerts, filterAlerts } from '../../actions/alert_actions';
+import MultiSelectField from '../common/multi_select_field.jsx';
+import { getFilteredAlerts } from '../../selectors';
+
+const ALERTS = [
+  { label: 'Active Course', value: 'ActiveCourseAlert' },
+  { label: 'Articles For Deletion', value: 'ArticlesForDeletionAlert' },
+  { label: 'Blocked Edits', value: 'BlockedEditsAlert' },
+  { label: 'Continued Course Activity', value: 'ContinuedCourseActivityAlert' },
+  { label: 'Deleted Uploads', value: 'DeletedUploadsAlert' },
+  { label: 'Discretionary Sanctions Edit', value: 'DiscretionarySanctionsEditAlert' },
+  { label: 'DYK Nomination', value: 'DYKNominationAlert' },
+  { label: 'GA Nomination', value: 'GANominationAlert' },
+  { label: 'No Enrolled Students', value: 'NoEnrolledStudentsAlert' },
+  { label: 'Productive Course', value: 'ProductiveCourseAlert' },
+  { label: 'Unsubmitted Course', value: 'UnsubmittedCourseAlert' },
+  { label: 'Untrained Students', value: 'UntrainedStudentsAlert' },
+];
 
 const AlertsHandler = createReactClass({
   displayName: 'AlertsHandler',
 
-
   propTypes: {
     fetchAlerts: PropTypes.func,
-    alerts: PropTypes.array
+    alerts: PropTypes.array,
   },
 
   componentWillMount() {
@@ -32,6 +48,10 @@ const AlertsHandler = createReactClass({
     return this.props.sortAlerts(e.target.value);
   },
 
+  filterAlerts(selectedFilters) {
+    return this.props.filterAlerts(selectedFilters);
+  },
+
   render() {
     let alertList;
     if (this.props.alerts) {
@@ -39,6 +59,7 @@ const AlertsHandler = createReactClass({
         <div id="alerts" className="campaign_main alerts container">
           <div className="section-header">
             <h3>{I18n.t('campaign.alert_label')}</h3>
+            <MultiSelectField options={ALERTS} selected={this.props.selectedFilters} setSelectedFilters={this.filterAlerts} />
             <div className="sort-select">
               <select className="sorts" name="sorts" onChange={this.sortSelect}>
                 <option value="type">{I18n.t('campaign.alert_type')}</option>
@@ -48,7 +69,7 @@ const AlertsHandler = createReactClass({
               </select>
             </div>
           </div>
-          <AlertsList alerts={this.props.alerts} />
+          <AlertsList alerts={this.props.selectedAlerts} sortBy={this.props.sortAlerts} />
         </div>
       );
     }
@@ -59,9 +80,11 @@ const AlertsHandler = createReactClass({
 });
 
 const mapStateToProps = state => ({
-  alerts: state.alerts.alerts
+  alerts: state.alerts.alerts,
+  selectedFilters: state.alerts.selectedFilters,
+  selectedAlerts: getFilteredAlerts(state),
  });
 
-const mapDispatchToProps = { fetchAlerts, sortAlerts };
+const mapDispatchToProps = { fetchAlerts, sortAlerts, filterAlerts };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlertsHandler);

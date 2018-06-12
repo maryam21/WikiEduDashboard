@@ -32,6 +32,7 @@ bn:
     my_dashboard: আমার ড্যাশবোর্ড
     recent_activity: সাম্প্রতিক কার্যকালাপ
     report_problem: সমস্যার কথা জানান
+    request_account_create: অ্যাকাউন্ট তৈরি করুন
     search: প্রশ্ন থাকলে জিজ্ঞাস করুন
     sign_up_extended: উইকিপিডিয়া দিয়ে নিবন্ধন করুন
     sign_up_log_in_extended: উইকিপিডিয়া দিয়ে
@@ -106,7 +107,12 @@ bn:
     milestones:
       title: মাইলফলক
   campaign:
+    alert_article: নিবন্ধের শিরোনাম
+    alert_type: ধরন
+    alert_user_id: ব্যবহারকারী
     campaign: প্রচারাভিযান
+    created_at: তারিখ
+    course: কোর্স
     no_passcode: কোন পাসকোড নেই
     none: কোনটিই নয়
     requested_accounts: অনুরোধকৃত অ্যাকাউন্ট
@@ -120,6 +126,7 @@ bn:
     label: চ্যাট
   courses:
     activity: কর্মকাণ্ড
+    alerts: অবহিতি
     actions: কার্যসমূহ
     articles: নিবন্ধসমূহ
     calendar:
@@ -274,6 +281,7 @@ bn:
     header: উইকিমিডিয়া কমন্সে আপলোডকৃত ফাইল
     image: চিত্র
     label: আপলোডসমূহ
+    uploaded_at: আপলোডের তারিখ
   users:
     assign_articles_done: সম্পন্ন
     contributions: ব্যবহারকারীর অবদানসমূহ
@@ -312,4 +320,7 @@ bn:
   survey:
     email:
       headline: প্রিয়, %{username}
+  onboarding:
+    supplementary:
+      why_are_you_here: আপনি কী করতে চান?
 ...

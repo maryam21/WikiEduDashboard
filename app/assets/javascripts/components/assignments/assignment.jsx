@@ -11,7 +11,7 @@ const userLink = (wiki, assignment) => {
     return <div key={`assignment_${assignment.id}`}>{assignment.username}</div>;
   }
   const link = `https://${wiki.language}.${wiki.project}.org/wiki/User:${assignment.username}`;
-  return <a key={`assignment_${assignment.id}`} href={link}>{assignment.username}</a>;
+  return <a key={`assignment_${assignment.id}`} href={link} target="_blank">{assignment.username}</a>;
 };
 
 const Assignment = createReactClass({
@@ -20,13 +20,14 @@ const Assignment = createReactClass({
     article: PropTypes.object,
     assignmentGroup: PropTypes.array,
     course: PropTypes.object,
-    current_user: PropTypes.object
+    current_user: PropTypes.object,
+    wikidataLabel: PropTypes.string
   },
   render() {
     if (!this.props.course.home_wiki) { return <div />; }
     const article = this.props.article || CourseUtils.articleFromAssignment(this.props.assignmentGroup[0], this.props.course.home_wiki);
     if (!article.formatted_title) {
-      article.formatted_title = CourseUtils.formattedArticleTitle(article, this.props.course.home_wiki);
+      article.formatted_title = CourseUtils.formattedArticleTitle(article, this.props.course.home_wiki, this.props.wikidataLabel);
     }
     const className = 'assignment';
     const ratingClass = `rating ${article.rating}`;

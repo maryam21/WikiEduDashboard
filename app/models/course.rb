@@ -12,7 +12,7 @@
 #  school                :string(255)
 #  term                  :string(255)
 #  character_sum         :integer          default(0)
-#  view_sum              :integer          default(0)
+#  view_sum              :bigint(8)        default(0)
 #  user_count            :integer          default(0)
 #  article_count         :integer          default(0)
 #  revision_count        :integer          default(0)
@@ -53,6 +53,7 @@ require_dependency "#{Rails.root}/lib/course_training_progress_manager"
 require_dependency "#{Rails.root}/lib/trained_students_manager"
 require_dependency "#{Rails.root}/lib/word_count"
 require_dependency "#{Rails.root}/lib/training_module"
+require_dependency "#{Rails.root}/lib/course_meetings_manager"
 
 #= Course model
 class Course < ApplicationRecord
@@ -86,6 +87,11 @@ class Course < ApplicationRecord
   has_many(:all_revisions, lambda do |course|
     where('date >= ?', course.start).where('date <= ?', course.end)
   end, through: :students)
+
+  # Same as revisions, but isn't bounded by the course end date
+  has_many(:recent_revisions, lambda do |course|
+    where('date >= ?', course.start)
+  end, through: :students, source: :revisions)
 
   has_many(:uploads, lambda do |course|
     where('uploaded_at >= ?', course.start).where('uploaded_at <= ?', course.end)
@@ -159,10 +165,6 @@ class Course < ApplicationRecord
 
   scope :ready_for_update, -> { current.or(where(needs_update: true)) }
 
-  scope :ready_for_short_update, lambda {
-    strictly_current.where('end <= ?', 1.day.from_now)
-  }
-
   def self.will_be_ready_for_survey(opts)
     days_offset, before, relative_to = opts.values_at(:days, :before, :relative_to)
     today = Time.zone.now
@@ -231,10 +233,6 @@ class Course < ApplicationRecord
     true
   end
 
-  def current?
-    start < Time.zone.now && self.end > Time.zone.now - UPDATE_LENGTH
-  end
-
   def approved?
     campaigns.any? && !withdrawn
   end
@@ -254,7 +252,7 @@ class Course < ApplicationRecord
   end
 
   def wiki_ids
-    ([home_wiki_id] + revisions.pluck('DISTINCT wiki_id')).uniq
+    ([home_wiki_id] + revisions.pluck(Arel.sql('DISTINCT wiki_id'))).uniq
   end
 
   def scoped_article_ids
@@ -312,6 +310,14 @@ class Course < ApplicationRecord
   def account_requests_enabled?
     return true if flags[:register_accounts].present?
     campaigns.exists?(register_accounts: true)
+  end
+
+  def meetings_manager
+    @meetings_manager ||= CourseMeetingsManager.new(self)
+  end
+
+  def training_progress_manager
+    @training_progress_manager ||= CourseTrainingProgressManager.new(self)
   end
 
   #################

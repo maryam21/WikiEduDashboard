@@ -39,10 +39,12 @@ class Alert < ApplicationRecord
     DeletedUploadsAlert
     DiscretionarySanctionsEditAlert
     DYKNominationAlert
+    FirstEnrolledStudentAlert
     GANominationAlert
     NeedHelpAlert
     NoEnrolledStudentsAlert
     OnboardingAlert
+    OverdueTrainingAlert
     ProductiveCourseAlert
     SurveyResponseAlert
     UnsubmittedCourseAlert
@@ -140,6 +142,10 @@ class Alert < ApplicationRecord
 
   def resolvable?
     false
+  end
+
+  def opt_out_link
+    nil
   end
 
   def resolve_explanation

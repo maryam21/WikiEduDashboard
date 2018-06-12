@@ -12,7 +12,7 @@
 #  school                :string(255)
 #  term                  :string(255)
 #  character_sum         :integer          default(0)
-#  view_sum              :integer          default(0)
+#  view_sum              :bigint(8)        default(0)
 #  user_count            :integer          default(0)
 #  article_count         :integer          default(0)
 #  revision_count        :integer          default(0)
@@ -107,7 +107,7 @@ describe Course, type: :model do
           course_id: 1).save
 
     # Update caches
-    ArticlesCourses.update_all_caches
+    ArticlesCourses.update_all_caches(ArticlesCourses.all)
     CoursesUsers.update_all_caches(CoursesUsers.ready_for_update)
     Course.update_all_caches
 

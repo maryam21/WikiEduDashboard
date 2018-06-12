@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require "#{Rails.root}/app/services/update_course_stats"
+require "#{Rails.root}/lib/assignment_manager"
 
 MILESTONE_BLOCK_KIND = 2
 
@@ -9,7 +11,7 @@ MILESTONE_BLOCK_KIND = 2
 # Remove this after implementing server-side rendering
 def js_visit(path, count=3)
   visit path
-  expect(page).to have_content 'Explore'
+  expect(page).to have_content('Explore').or have_content('Find Programs')
 
 # This is a workaround for some of the intermittent errors that occur when
 # running capybara with xvfb, which we do on travis-ci and in vagrant.
@@ -119,7 +121,7 @@ describe 'the course page', type: :feature, js: true do
            content: 'blocky block')
 
     ArticlesCourses.update_from_course(Course.last)
-    ArticlesCourses.update_all_caches
+    ArticlesCourses.update_all_caches(Course.last.articles_courses)
     CoursesUsers.update_all_caches(CoursesUsers.ready_for_update)
     Course.update_all_caches
 
@@ -251,7 +253,7 @@ describe 'the course page', type: :feature, js: true do
     it 'does not show an "Add an available article" button for students' do
       js_visit "/courses/#{slug}/articles"
       expect(page).not_to have_content 'Available Articles'
-      expect(page).to_not have_content 'Add an available article'
+      expect(page).to_not have_content 'Add available articles'
     end
 
     it 'shows an "Add an available article" button for instructors/admins' do
@@ -259,7 +261,7 @@ describe 'the course page', type: :feature, js: true do
       js_visit "/courses/#{slug}/articles"
       expect(page).to have_content 'Available Articles'
       assigned_articles_section = page.first(:css, '#available-articles')
-      expect(assigned_articles_section).to have_content 'Add an available article'
+      expect(assigned_articles_section).to have_content 'Add available articles'
     end
 
     it 'allow instructor to add an available article' do
@@ -268,10 +270,10 @@ describe 'the course page', type: :feature, js: true do
       stub_oauth_edit
       js_visit "/courses/#{slug}/articles"
       expect(page).to have_content 'Available Articles'
-      click_button 'Add an available article'
-      page.first(:css, '#available-articles .pop.open').first('input').set('Education')
-      click_button 'Assign'
-      click_button 'OK'
+      click_button 'Add available articles'
+      page.first(:css, '#available-articles .pop.open').first('textarea').set('Education')
+      click_button 'Add articles'
+      sleep 1
       assigned_articles_table = page.first(:css, '#available-articles table.articles')
       expect(assigned_articles_table).to have_content 'Education'
     end
@@ -358,13 +360,15 @@ describe 'the course page', type: :feature, js: true do
     it 'should display a list of uploads' do
       # First, visit it no uploads
       visit "/courses/#{slug}/uploads"
-      expect(page).to have_content I18n.t('uploads.none')
+      expect(page).to have_content I18n.t('courses_generic.uploads_none')
       create(:commons_upload,
              user_id: 1,
              file_name: 'File:Example.jpg',
-             uploaded_at: '2015-06-01')
-      js_visit "/courses/#{slug}/uploads"
-      expect(page).to have_content 'Example.jpg'
+             uploaded_at: '2015-06-01',
+             thumburl: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Real_Grottolella.png')
+      visit "/courses/#{slug}/uploads"
+      expect(page).to have_selector('div.upload')
+      expect(page).not_to have_content I18n.t('courses_generic.uploads_none')
     end
   end
 
@@ -386,12 +390,12 @@ describe 'the course page', type: :feature, js: true do
       login_as(user, scope: :user)
       stub_oauth_edit
 
-      allow(CourseRevisionUpdater).to receive(:import_new_revisions)
-
+      expect(CourseRevisionUpdater).to receive(:import_new_revisions)
+      expect_any_instance_of(CourseUploadImporter).to receive(:run)
       visit "/courses/#{slug}/manual_update"
       js_visit "/courses/#{slug}"
       updated_user_count = user_count + 1
-      expect(page).to have_content "#{updated_user_count} Student Editors"
+      expect(page).to have_content "#{updated_user_count}\nStudent Editors"
     end
   end
 

@@ -23,8 +23,11 @@ import Modal from '../common/modal.jsx';
 
 import Editable from '../high_order/editable.jsx';
 import TextInput from '../common/text_input.jsx';
+import Notifications from '../common/notifications.jsx';
+
 import DatePicker from '../common/date_picker.jsx';
 import CourseActions from '../../actions/course_actions.js';
+import ServerActions from '../../actions/server_actions.js';
 
 import CourseStore from '../../stores/course_store.js';
 import TagStore from '../../stores/tag_store.js';
@@ -40,6 +43,8 @@ const getState = () =>
   })
 ;
 
+const POLL_INTERVAL = 300000; // 5 minutes
+
 const Details = createReactClass({
   displayName: 'Details',
 
@@ -49,8 +54,7 @@ const Details = createReactClass({
     campaigns: PropTypes.array,
     tags: PropTypes.array,
     controls: PropTypes.func,
-    editable: PropTypes.bool,
-    allCampaigns: PropTypes.array
+    editable: PropTypes.bool
   },
 
   mixins: [ValidationStore.mixin],
@@ -58,6 +62,15 @@ const Details = createReactClass({
     return getState();
   },
 
+  componentDidMount() {
+    this.timeout = this.poll(); // Start polling
+  },
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearInterval(this.timeout); // End it
+    }
+  },
   updateDetails(valueKey, value) {
     const updatedCourse = this.props.course;
     updatedCourse[valueKey] = value;
@@ -88,6 +101,16 @@ const Details = createReactClass({
     // On P&E Dashboard, anyone with edit rights for the course may rename it.
     return true;
   },
+
+  poll() {
+    return setInterval(() => {
+      if (!this.props.editable) {
+        ServerActions.fetch('course', this.props.course.slug);
+      }
+    }, POLL_INTERVAL);
+  },
+
+  timeout: null,
 
   render() {
     const canRename = this.canRename();
@@ -167,7 +190,7 @@ const Details = createReactClass({
     }
 
     let expectedStudents;
-    if (this.props.course.expected_students || this.props.course.expected_students === 0) {
+    if (this.props.course.expected_students || this.props.course.expected_students === 0 || this.props.editable) {
       expectedStudents = (
         <TextInput
           onChange={this.updateDetails}
@@ -390,6 +413,7 @@ const Details = createReactClass({
     return (
       <div className="modal-course-details">
         <Modal>
+          <Notifications />
           {shared}
         </Modal>
       </div>
@@ -398,19 +422,15 @@ const Details = createReactClass({
 }
 );
 
-const redirectToNewSlug = () => {
-  const newSlug = CourseUtils.generateTempId(CourseStore.getCourse());
-  window.location = `/courses/${newSlug}`;
-};
-
 // If the course has been renamed, we first warn the user that this is happening.
 const saveCourseDetails = (data, courseId = null) => {
   if (!CourseStore.isRenamed()) {
     return CourseActions.persistCourse(data, courseId);
   }
   if (confirm(I18n.t('editable.rename_confirmation'))) {
-    CourseUtils.cleanupCourseSlugComponents(data.course);
-    return CourseActions.persistAndRedirectCourse(data, courseId, redirectToNewSlug);
+    data.course = CourseUtils.cleanupCourseSlugComponents(data.course);
+    const newSlug = CourseUtils.generateTempId(data.course);
+    return CourseActions.persistAndRedirectCourse(data, courseId, newSlug);
   }
 };
 

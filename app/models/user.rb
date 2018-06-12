@@ -168,13 +168,24 @@ class User < ApplicationRecord
     CoursesUsers::Roles::VISITOR_ROLE
   end
 
+  EDITING_ROLES = [CoursesUsers::Roles::INSTRUCTOR_ROLE,
+                   CoursesUsers::Roles::CAMPUS_VOLUNTEER_ROLE,
+                   CoursesUsers::Roles::ONLINE_VOLUNTEER_ROLE,
+                   CoursesUsers::Roles::WIKI_ED_STAFF_ROLE].freeze
   def can_edit?(course)
     return true if admin?
-    editing_roles = [CoursesUsers::Roles::INSTRUCTOR_ROLE,
-                     CoursesUsers::Roles::CAMPUS_VOLUNTEER_ROLE,
-                     CoursesUsers::Roles::ONLINE_VOLUNTEER_ROLE,
-                     CoursesUsers::Roles::WIKI_ED_STAFF_ROLE]
-    editing_roles.include? role(course)
+    EDITING_ROLES.include? role(course)
+  end
+
+  REAL_NAME_ROLES = [CoursesUsers::Roles::INSTRUCTOR_ROLE,
+                     CoursesUsers::Roles::WIKI_ED_STAFF_ROLE].freeze
+  def can_see_real_names?(course)
+    return true if admin?
+    REAL_NAME_ROLES.include? role(course)
+  end
+
+  def email_preferences_token
+    (user_profile || create_user_profile).email_preferences_token
   end
 
   # Exclude tokens/secrets from json output

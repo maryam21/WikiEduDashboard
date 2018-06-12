@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get 'users/:username' => 'user_profiles#show' , constraints: { username: /.*/ }
     get 'user_stats' => 'user_profiles#stats'
     get 'stats_graphs' => 'user_profiles#stats_graphs'
+    get 'update_email_preferences/:username' => 'user_profiles#update_email_preferences'
     post 'users/update/:username' => 'user_profiles#update'
   end
 
@@ -145,10 +146,7 @@ Rails.application.routes.draw do
   put 'greeting' => 'greeting#greet_course_students'
 
   # Article Finder
-  if Features.enable_article_finder?
-    get 'article_finder(/*any)' => 'article_finder#index'
-    post 'article_finder(/*any)' => 'article_finder#results'
-  end
+  get 'article_finder' => 'article_finder#index'
 
   # Reports and analytics
   get 'analytics(/*any)' => 'analytics#index'
@@ -252,6 +250,7 @@ Rails.application.routes.draw do
   # Unauthenticated users root to the home page
   root to: 'home#index'
 
+  # Surveys
   mount Rapidfire::Engine => "/surveys/rapidfire", :as => 'rapidfire'
   get '/surveys/results' => 'surveys#results_index', as: 'results'
   resources :survey_assignments, path: 'surveys/assignments'
@@ -270,6 +269,8 @@ Rails.application.routes.draw do
   put '/survey_notification' => 'survey_notifications#update'
   post '/survey_notification/create' => 'survey_assignments#create_notifications', as: 'create_notifications'
   post '/survey_notification/send' => 'survey_assignments#send_notifications', as: 'send_notifications'
+  get '/survey/responses' => 'survey_responses#index'
+  delete '/survey/responses/:id/delete' => 'survey_responses#delete'
 
   # Onboarding
   get 'onboarding(/*any)' => 'onboarding#index', as: :onboarding

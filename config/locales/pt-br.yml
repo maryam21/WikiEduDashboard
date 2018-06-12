@@ -50,6 +50,7 @@ pt-br:
     recent_activity: Atividade recente
     report_problem: Informar um problema
     request_account: Pedir uma conta
+    request_account_create: Criar uma conta
     search: perguntar
     search_results: 'Resultados para: ''%{search_terms}'''
     sign_up_extended: Registrar-se na Wikipédia
@@ -171,7 +172,9 @@ pt-br:
     title_too_large: O título não deve exceder 255 caracteres
     assignees: Assinante(s)
     assign_other: Atribuir um artigo
-    add_available: Adicionar um artigo disponível
+    add_available: Adicionar artigos disponíveis
+    add_available_placeholder: Adicionar um título de artigo ou URL por linha
+    add_available_submit: Adicionar artigos
     assign_self: Atribuir um artigo a mim mesmo
     assign_tooltip: Um artigo designado é aquele que você planeja criar ou melhorar.
     confirm_add_available: Tem certeza de que deseja adicionar %{title}?
@@ -195,6 +198,10 @@ pt-br:
   campaign:
     active_campaigns: Campanhas ativas
     add_organizer: Adicionar um organizador
+    alert_article: Título do artigo
+    alert_label: Alertas das campanhas
+    alert_type: Tipo
+    alert_user_id: Usuário
     all_campaigns: Todas as campanhas
     already_exists: Essa campanha já existe! Por favor tente novamente com um novo
       título ou "slug".
@@ -203,12 +210,14 @@ pt-br:
     campaign_deleted: A campanha "%{title}" foi eliminada
     campaign_not_updated: A campanha não pode ser atualizada
     campaign_updated: Campanha atualizada
+    created_at: Data
     confirm_campaign_deletion: Tem certeza de que deseja excluir a campanha intitulada
       %{title}? Se assim for, escreva o título da campanha para prosseguir.
     confirm_campaign_deletion_failed: '"%{title}" não é o título desta campanha. A
       campanha não foi eliminada.'
     confirm_course_removal: Tens certeza que quer remover "%{title}" da campanha "%{campaign_title}"?
     course_already_removed: '"%{title}" já foi removida da campanha "%{campaign_title}"'
+    course: Curso
     course_removed: '"%{title}" foi removido da campanha "%{campaign_title}"'
     create_campaign: Criar uma nova Campanha
     create_my_campaign: Criar a minha Campanha!
@@ -221,6 +230,7 @@ pt-br:
     delete_campaign: Deletar essa campanha
     disable_account_requests: Desativar solicitações de conta
     enable_account_requests: Ativar as solicitações de contas
+    no_alerts: Esta campanha não tem alertas
     no_passcode: sem código de acesso
     none: Nenhum
     organizers: Organizadores
@@ -262,6 +272,7 @@ pt-br:
       de contas?
     activity: Atividade
     active_courses: '%{course_type} ativo'
+    alerts: Alertas
     all_courses: Todos os cursos
     already_enrolled: Você já é parte de '%{title}'!
     already_exists: Isso já existe para este curso!
@@ -436,7 +447,9 @@ pt-br:
     join: Participar
     join_course: Participar do curso
     join_prompt: Participar de '%{title}'?
-    join_successful: Você está participando de %{title}.
+    join_successful: Inscreveu-se em %{title}. O painel de controlo mantém um registo
+      automático das suas contribuições, com atualizações periódicas. Regresse futuramente
+      para verificar o impacto que teve.
     join_failed: Inscrição falhou.
     join_failure_details:
       cannot_join_twice: Usuários não podem se inscrever no mesmo curso duas vezes.
@@ -529,6 +542,9 @@ pt-br:
     timeline: Detalhes da atribuição
     timeline_enabled: Cronograma ativado
     timeline_link: Linha do tempo
+    timeline_tooltip: Ativar o cronograma permite-lhe especificar atividades semana
+      a semana e atribuir módulos de formação. É útil para cursos do Programa Educativo
+      e para outros programas que sejam longos e altamente estruturados.
     time_zone_message: Horas de início e fim são apresentadas em seu fuso-horário
       local.
     title: Título
@@ -558,7 +574,7 @@ pt-br:
       à Wikipédia com sua conta de usuário. Depois disso, novas edições no cronograma
       serão refletidas na Wikipédia. Você tem certeza de que deseja prosseguir?
     wiki_staff: Equipe Wiki Ed
-    withdrawn: Retirado
+    withdrawn: Não fez atribuição
     word_count_doc: Uma estimativa do número de palavras adicionadas ao espaço principal
       pelos estudantes do curso durante o semestre do curso
     yourcourses: Seus cursos
@@ -673,6 +689,7 @@ pt-br:
     are_trained: estão em dia com o treinamento
     articles_created: Artigos criados
     articles_edited: Artigos editados
+    bytes_added: Bytes Adicionado
     characters: Caracteres
     char_added: Caracteres adicionados
     char_changed: Caracteres alterados
@@ -879,6 +896,7 @@ pt-br:
     none: Esta classe não contribuiu com nenhuma imagem ou com outros arquivos de
       mídia no Wikimedia Commons.
     time_doc: Horário de cada envio em seu horário local
+    uploaded_at: Enviado a
     uploaded_by: Enviado Por
     usage_count: Total de Uso
     usages: Usos
@@ -1025,15 +1043,15 @@ pt-br:
       e tente entrar novamente.
   error_incorrect_passcode:
     header: Código de acesso incorreto. :-(
-    explanation: O código de acesso para inscrever-se neste curso está incorreto.
-      Por favor, peça ao professor o código de acesso atual para inscrever-se neste
-      curso.
+    explanation: A senha para se inscrever neste curso está incorreta. Pergunte ao
+      instrutor para a senha atual para se inscrever neste curso. Você pode tentar
+      novamente inserindo o código correto abaixo.
+  error_no_course:
+    explanation: Não existe nenhum curso %{slug}.
   error_404:
     header: Página não encontrada. :-(
-    explanation: Esta página não existe. Se você estava tentando chegar ao painel
-      de controle para um curso, esse curso pode não estar cadastrado no painel de
-      controle. Se foi cadastrado recentemente, pode demorar um pouco para que o sistema
-      o adicione.
+    explanation: Esta página não existe. Se estava tentando chegar ao painel de controle
+      de um curso, esse curso pode não estar registado neste painel.
   error_422:
     header: 422 - entidade improcessável. :-(
     explanation: Ocorreu um erro. Por favor, entre em contato com os responsáveis
@@ -1080,5 +1098,18 @@ pt-br:
   onboarding:
     supplementary:
       header: Como você ficou sabendo sobre nós?
-      question_text: Onde, ou de quem, você ouviu pela primeira vez sobre Wiki Education?
+      where_did_you_hear: Onde, ou de quem, você ouviu pela primeira vez sobre Wiki
+        Education?
+      why_are_you_here: O que você gostaria de fazer?
+  article_finder:
+    page_assessment_grade: Grade de avaliação
+    completeness_estimate: Pontuação de integridade
+    average_views: Média de visualizações por dia
+    add_available_article: Adicionar como artigo disponível
+    already_added: Já adicionado aos artigos disponíveis
+    max_completeness_label: Completude máximas(0-100)
+    minimum_views_label: Visualizações mínimas
+    depth: Profundidade
+    category: Categoria
+    no_article_found: Nenhum artigo encontrado nesta categoria
 ...

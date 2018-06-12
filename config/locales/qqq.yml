@@ -180,7 +180,7 @@ qqq:
       prevent mysql error
     assignees: '{{Identical|Assignee}}'
     assign_other: Button to assign an article to a student
-    add_available: Button to add an article title to the list of articles available
+    add_available: Button to add article titles to the list of articles available
       for program participants to work on
     assign_self: Button to assign an article to self
     confirm_add_available: Confirmation message for adding an article as an assignment
@@ -406,7 +406,9 @@ qqq:
     join_prompt: |-
       Do you want to join this course?
       {{Identical|Join}}
-    join_successful: Message that join was successful
+    join_successful: |-
+      Message that joining a program was successful,
+      with an explanation of how the Dashboard will track contributions.
     leave_confirmation: Confirmation asking whether the user would like to unenroll
       from a course.
     leave_course: Button for a user to leave the course
@@ -803,4 +805,6 @@ qqq:
       link: Link to take survey from email
     follow_up:
       message: Survey invitation email text. (Wiki Ed only)
+  article_finder:
+    category: '{{Identical|Category}}'
 ...

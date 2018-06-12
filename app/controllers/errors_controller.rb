@@ -6,19 +6,20 @@ class ErrorsController < ApplicationController
 
   def file_not_found
     @message = not_found_message
-    render status: 404
+    render status: :not_found # 404
   end
 
   def unprocessable
-    render status: 422
+    render status: :unprocessable_entity # 422
   end
 
   def internal_server_error
-    render status: 500
+    render status: :internal_server_error # 500
   end
 
   def incorrect_passcode
-    render status: 401
+    @path = params[:retry] || ''
+    render status: :unauthorized # 401
   end
 
   def login_error
@@ -27,7 +28,7 @@ class ErrorsController < ApplicationController
     # a status in the 500 range will automatically bypass this and
     # render internal_server_error
     else
-      render status: 200
+      render status: :ok # 200
     end
   end
 

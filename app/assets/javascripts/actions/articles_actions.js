@@ -1,5 +1,6 @@
 import * as types from '../constants';
 import logErrorMessage from '../utils/log_error_message';
+import { fetchWikidataLabelsForArticles } from './wikidata_actions';
 
 const fetchArticlesPromise = (courseId, limit) => {
   return new Promise((res, rej) => {
@@ -17,7 +18,8 @@ const fetchArticlesPromise = (courseId, limit) => {
   });
 };
 
-export const fetchArticles = (courseId, limit) => dispatch => {
+
+export const fetchArticles = (courseId, limit) => (dispatch) => {
   return (
     fetchArticlesPromise(courseId, limit)
       .then(resp => {
@@ -30,8 +32,11 @@ export const fetchArticles = (courseId, limit) => dispatch => {
           type: types.SORT_ARTICLES,
           key: 'character_sum'
         });
+        // Now that we received the articles data, query wikidata.org for the labels
+        // of any Wikidata entries that are among the articles.
+        fetchWikidataLabelsForArticles(resp.course.articles, dispatch);
        })
-      .catch(response => (dispatch({ type: types.API_FAIL, data: response })))
+      .catch(response => dispatch({ type: types.API_FAIL, data: response }))
   );
 };
 

@@ -58,6 +58,7 @@ en:
     recent_activity: Recent Activity
     report_problem: Report a problem
     request_account: Request an account
+    request_account_create: Create an account
     search: ask a question
     search_results: "Results for: '%{search_terms}'"
     sign_up_extended: Sign up with Wikipedia
@@ -71,7 +72,6 @@ en:
     change: Change
     details: Details
     confirm: OK
-    cancel: Cancel
     opt_in: 'Yes'
     opt_out: 'No'
 
@@ -189,7 +189,9 @@ en:
     title_too_large: The title shouldn't exceed 255 characters
     assignees: Assignee(s)
     assign_other: Assign an article
-    add_available: Add an available article
+    add_available: Add available articles
+    add_available_placeholder: Add one article title or URL per line
+    add_available_submit: Add articles
     assign_self: Assign myself an article
     assign_tooltip: An assigned article is one that you plan to create or improve.
     confirm_add_available: Are you sure you want to add %{title}?
@@ -455,7 +457,9 @@ en:
     join: Join
     join_course: Join course
     join_prompt: Join '%{title}'?
-    join_successful: You’ve successfully joined %{title}.
+    join_successful: >
+      You’ve successfully joined %{title}.
+      The dashboard will automatically keep track of your contributions with periodic updates. Check back later to see what impact you've made!
     join_failed: Enrollment failed.
     join_failure_details:
       cannot_join_twice: Users may not join the same course twice.
@@ -575,7 +579,7 @@ en:
 
       Are you sure you want to do this?
     wiki_staff: Wiki Ed Staff
-    withdrawn: Withdrawn
+    withdrawn: Did not do assignment
     word_count_doc: An estimate of the number of words added to mainspace articles by the course's students during the course term
     yourcourses: Your Courses
     survey:
@@ -689,6 +693,7 @@ en:
     are_trained: are up-to-date with training
     articles_created: Articles Created
     articles_edited: Articles Edited
+    bytes_added: Bytes Added
     characters: Characters
     char_added: Chars Added
     char_changed: Characters Changed
@@ -875,6 +880,7 @@ en:
     loading: Loading uploads...
     none: This class has not contributed any images or other media files to Wikimedia Commons.
     time_doc: The time of each upload in your local time
+    uploaded_at: Uploaded At
     uploaded_by: Uploaded By
     usage_count: Usage Count
     usages: Usages
@@ -1037,7 +1043,8 @@ en:
     header: "Incorrect passcode.  :-("
     explanation: >
       The passcode for enrolling in this course in incorrect. Please ask the
-      instructor for the current passcode to enroll in this course.
+      instructor for the current passcode to enroll in this course. You can
+      retry by entering the correct passcode below.
 
   error_no_course:
     explanation: "No such course %{slug} exists."
@@ -1093,4 +1100,17 @@ en:
   onboarding:
     supplementary:
       header: "How did you hear about us?"
-      question_text: "Where, or from whom, did you first hear about Wiki Education?"
+      where_did_you_hear: "Where, or from whom, did you first hear about Wiki Education?"
+      why_are_you_here: "What would you like to do?"
+
+  article_finder:
+    page_assessment_grade: "Assessment Grade"
+    completeness_estimate: "Completeness Score"
+    average_views: "Average views/Day"
+    add_available_article: "Add as available article"
+    already_added: "Already added to available articles"
+    max_completeness_label: "Max Completeness(0-100)"
+    minimum_views_label: "Minimum Views"
+    depth: "Depth"
+    category: "Category"
+    no_article_found: "No articles found in this category"

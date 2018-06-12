@@ -14,7 +14,8 @@ const ArticleList = ({
   current_user,
   actions,
   articleDetails,
-  sortBy
+  sortBy,
+  wikidataLabels
 }) => {
   const keys = {
     rating_num: {
@@ -43,11 +44,17 @@ const ArticleList = ({
     }
   };
 
+  // If a parameter like ?showArticle=123 is present,
+  // the ArticleViewer should go into show mode immediately.
+  // this allows for links to directly view a specific article.
+  const showArticleId = Number(location.search.split('showArticle=')[1]);
   const articleElements = articles.map(article => (
     <Article
       article={article}
+      showOnMount={showArticleId === article.id}
       course={course}
       key={article.id}
+      wikidataLabel={wikidataLabels[article.title]}
       // eslint-disable-next-line
       current_user={current_user}
       fetchArticleDetails={actions.fetchArticleDetails}
